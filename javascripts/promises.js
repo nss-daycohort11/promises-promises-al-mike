@@ -4,7 +4,8 @@ requirejs.config({
     'jquery': '../lib/bower_components/jquery/dist/jquery.min',
     'lodash': '../lib/bower_components/lodash/lodash.min',
     'hbs': '../lib/bower_components/require-handlebars-plugin/hbs',
-    'bootstrap': '../lib/bower_components/bootstrap/dist/js/bootstrap.min'
+    'bootstrap': '../lib/bower_components/bootstrap/dist/js/bootstrap.min',
+    'q': '../lib/bower_components/q/q'
   },
   shim: {
     'bootstrap': ['jquery']
@@ -12,34 +13,41 @@ requirejs.config({
 });
 
 requirejs(
-  ["jquery", "hbs", "bootstrap", "get-books"], 
-  function($, Handlebars, bootstrap, books) {
+  ["jquery", "hbs", "bootstrap", "q", "get-books", "get-book-types", "lodash"], 
+  function($, Handlebars, bootstrap, q, books, booktypes, _) {
+  
+    var typesObject = {};
 
-    books.load(function(bookArray) {
-      require(['hbs!../templates/books'], function(bookTpl) {
-        $("#bookList").html(bookTpl({ books:bookArray }));
-      });
-    });
-
-    /* Here's some pseudo-code for how it should look once you
-       start using promises
-
-    getBookTypes()
-      .then(function(types) {
-        getBooks(types);
+    booktypes.loadTypes()
+      .then(function(typesData) {
+        console.log("typesData", typesData);
+        typesObject = typesData;
+        console.log("typesObject", typesObject);
+        return books.loadBooks();
       })
-      .then(function(books) {
-        // add the type key to each book that is currently
-        // being performed in the get-books file
+      .then(function(booksData) {
+        console.log("booksData", booksData);
 
-        // then bind the template to the data 
-        // (p.s. make the handlebar template a module dependency)
+        typesObject = Object.keys( typesObject ).map(key => typesObject[ key ]);
+        booksData = Object.keys( booksData ).map(key => booksData[ key ]);
+
+        var newbooks = booksData.map(book => {
+          console.log("currentBook", book);
+          console.log("currentBook.booktype", book.booktype);
+          book.type = _.find(typesObject, { id:book.booktype }).label;
+          console.log("currentBook", book);
+          return book;
+          }); 
+        console.log("new booksData array", newbooks);
+
         require(['hbs!../templates/books'], function(bookTpl) {
-          $("#bookList").html(bookTpl({ books:bookArray }));
+          $("#bookList").html(bookTpl({ newbooks }));
         });
-
       })
-     */
+      .fail(function(error) {
+        console.log("Oh no! Error!");
+
+      });
 
   }
 );
