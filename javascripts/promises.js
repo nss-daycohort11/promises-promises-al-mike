@@ -13,8 +13,8 @@ requirejs.config({
 });
 
 requirejs(
-  ["jquery", "hbs", "bootstrap", "q", "get-books", "get-book-types", "lodash"], 
-  function($, Handlebars, bootstrap, q, books, booktypes, _) {
+  ["jquery", "hbs", "bootstrap", "q", "get-books", "get-book-types", "lodash", "filter-books"], 
+  function($, Handlebars, bootstrap, q, books, booktypes, _, filterbooks) {
   
     var typesObject = {};
 
@@ -45,6 +45,26 @@ requirejs(
         require(['hbs!../templates/books'], function(bookTpl) {
           $("#bookList").html(bookTpl({ newbooks }));
         });
+
+
+        $(".all").on("click", function(event) {
+          // load all songs from ajax calls
+          filterbooks.filterAll(newbooks);
+        });
+
+
+        $(".fiction").on("click", function(event) {
+          // load type=fiction songs from ajax calls
+          filterbooks.filterFiction(newbooks);
+        });
+
+
+        $(".science").on("click", function(event) {
+          //load type=science & technology from ajax calls
+          filterbooks.filterScience(newbooks);
+        });
+
+
       })
       .fail(function(error) {
         console.log("Oh no! Error!");
