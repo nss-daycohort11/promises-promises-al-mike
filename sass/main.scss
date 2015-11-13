@@ -8,6 +8,30 @@ body {
 	font-family: Tahoma, Helvetica, sans-serif;
 }
 
+nav {
+	border-radius: none;
+}
+
+.navbar {
+	margin-bottom: 0;
+	border-radius: none
+}
+
+.navbar-default {
+	background-color: $darkblue;
+	/* border-color: $darkblue; */
+}
+
+.navbar-default .navbar-brand {
+	color: #fff;
+	text-transform: uppercase;
+	font-family: 'Oswald', sans-serif;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: #fff;
+}
+
 h2 {
 	color: $darkblue;
 	text-transform: uppercase;
@@ -44,4 +68,11 @@ p {
 
 .publisher {
 	font-style: italic;
+}
+
+
+@media (min-width: 768px) {
+	.navbar {
+		border-radius: none !important;
+	}
 }
