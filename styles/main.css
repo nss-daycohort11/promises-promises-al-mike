@@ -4,13 +4,35 @@ body {
   border: 0;
   font-family: Tahoma, Helvetica, sans-serif; }
 
+h2 {
+  color: #4682B4;
+  text-transform: uppercase;
+  font-family: 'Oswald', sans-serif; }
+
+p {
+  margin: 2% 0; }
+
 #booklist {
   padding: 4%; }
 
 .row {
-  background-color: steelblue;
-  border: 2px solid #000;
+  background-color: #c8daea;
+  border: 2px solid #4682B4;
   border-radius: 10px;
-  margin: 2% 0; }
+  margin: 2% 0;
+  padding: 0 2%; }
+
+.author {
+  font-weight: bold;
+  font-size: 1.4em;
+  font-family: 'Oswald', sans-serif; }
+
+.type {
+  font-style: italic;
+  font-size: 1.2em;
+  font-family: 'Oswald', sans-serif; }
+
+.publisher {
+  font-style: italic; }
 
 /*# sourceMappingURL=main.css.map */
