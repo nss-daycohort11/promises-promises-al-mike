@@ -15,3 +15,42 @@ requirejs.config({
     }
 });
 
+requirejs(
+  ["jquery", "hbs", "bootstrap", "q", "get-books", "get-book-types", "lodash"], 
+  function($, Handlebars, bootstrap, q, books, booktypes, _) {
+  
+    var typesObject = {};
+
+    booktypes.loadTypes()
+      .then(function(typesData) {
+        console.log("typesData", typesData);
+        typesObject = typesData;
+        console.log("typesObject", typesObject);
+        return books.loadBooks();
+      })
+      .then(function(booksData) {
+        console.log("booksData", booksData);
+
+        typesObject = Object.keys( typesObject ).map(key => typesObject[ key ]);
+        booksData = Object.keys( booksData ).map(key => booksData[ key ]);
+
+        var newbooks = booksData.map(book => {
+          console.log("currentBook", book);
+          console.log("currentBook.booktype", book.booktype);
+          book.type = _.find(typesObject, { id:book.booktype }).label;
+          console.log("currentBook", book);
+          return book;
+          }); 
+        console.log("new booksData array", newbooks);
+
+        require(['hbs!../templates/books'], function(bookTpl) {
+          $("#bookList").html(bookTpl({ newbooks }));
+        });
+      })
+      .fail(function(error) {
+        console.log("Oh no! Error!");
+
+      });
+
+  }
+);
