@@ -18,6 +18,8 @@ requirejs(
   
     var typesObject = {};
 
+    /*jshint esnext: true */
+
     booktypes.loadTypes()
       .then(function(typesData) {
         console.log("typesData", typesData);

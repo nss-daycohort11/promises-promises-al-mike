@@ -1,6 +1,6 @@
 define(function(require) {
   var _ = require("lodash");
-  var Q = require("q")
+  var Q = require("q");
 
   return {
     loadTypes: function(fn) {

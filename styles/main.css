@@ -1,4 +1,16 @@
 body {
-  margin: 0; }
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: Tahoma, Helvetica, sans-serif; }
+
+#booklist {
+  padding: 4%; }
+
+.row {
+  background-color: steelblue;
+  border: 2px solid #000;
+  border-radius: 10px;
+  margin: 2% 0; }
 
 /*# sourceMappingURL=main.css.map */
