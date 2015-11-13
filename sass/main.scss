@@ -1,3 +1,6 @@
+$darkblue: #4682B4;
+$lightblue: #c8daea;
+
 body {
 	margin: 0;
 	padding: 0;
@@ -5,13 +8,40 @@ body {
 	font-family: Tahoma, Helvetica, sans-serif;
 }
 
+h2 {
+	color: $darkblue;
+	text-transform: uppercase;
+	font-family: 'Oswald', sans-serif;
+}
+
+p {
+	margin: 2% 0;
+}
+
 #booklist {
 	padding: 4%;
 }
 
 .row {
-	background-color: steelblue;
-	border: 2px solid #000;
+	background-color: $lightblue;
+	border: 2px solid $darkblue;
 	border-radius: 10px;
 	margin: 2% 0;
+	padding: 0 2%;
+}
+
+.author {
+	font-weight: bold;
+	font-size: 1.4em;
+	font-family: 'Oswald', sans-serif;
+}
+
+.type {
+	font-style: italic;
+	font-size: 1.2em;
+	font-family: 'Oswald', sans-serif;
+}
+
+.publisher {
+	font-style: italic;
 }

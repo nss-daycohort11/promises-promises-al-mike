@@ -1,10 +1,13 @@
 <div class="container-fluid">
 {{#each newbooks}}
 	<div class="row">
-	  <h3>{{ title }}</h3>
-	  <section>{{author}} -- {{ type }}</section>
+	  <h2>{{ title }}</h2>
+	  <section>
+	  	<div class="author">by {{author}}</div>
+	  	<div class="type">{{ type }}</div>
+	  </section>
 	  <p>{{ synopsis }}</p>
-	  <p>{{ year }} - {{ publisher }}</p>
+	  <p class="publisher">{{ publisher }}, &copy{{ year }}</p>
 	</div>
 {{/each}}
 </div>
