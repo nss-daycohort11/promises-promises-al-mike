@@ -1,11 +1,12 @@
 define(function(require) {
   var _ = require("lodash");
+  var $ = require("jquery");
+  var gettypes = require("get-types");
 
   return {
     load: function(fn) {
-      // This XHR should be in its own require module, not here
-      $.ajax("https://nss-book-store.firebaseio.com/booktypes.json").done(function(types) {
-
+        var types = gettypes.getTypes();
+        console.log(types);
         // This XHR does belong here
         $.ajax("https://nss-book-store.firebaseio.com/books.json").done(function(books) {
 
@@ -17,6 +18,9 @@ define(function(require) {
             version of JavaScript syntax). They are called fat arrows.
             Check out the docs at http://es6-features.org/#ExpressionBodies
           */
+
+          /*jshint esnext: true */
+
           types = Object.keys( types ).map(key => types[ key ]);
           books = Object.keys( books ).map(key => books[ key ]);
 
@@ -24,7 +28,7 @@ define(function(require) {
             I'm using the lodash `find()` method here.
               https://lodash.com/docs#find
            */
-          var books = books.map(book => {
+          books = books.map(book => {
             book.type = _.find(types, { id:book.booktype }).label;
             return book;
           });
@@ -33,7 +37,6 @@ define(function(require) {
           fn(books);
 
         });
-      });
 
     }
   };
