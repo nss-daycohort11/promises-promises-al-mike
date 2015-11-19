@@ -1,17 +1,18 @@
 define(function(require) {
   var _ = require("lodash");
   var Q = require("q");
+  var $ = require("jquery");
 
   return {
-    loadTypes: function() {
-      console.log("loading types");
+  	getISBN: function() {
+      console.log("loading isbn");
       var deferred = Q.defer();
 
-      $.ajax("https://nss-book-store.firebaseio.com/booktypes.json")
-        .done(function(typesData) {
+      $.ajax("./data/isbns.json")
+        .done(function(isbnData) {
           //success
           console.log("Go you! Success!");
-          deferred.resolve(typesData);
+          deferred.resolve(isbnData);
         })
         .fail(function(xhr, status, error) {
           //failure

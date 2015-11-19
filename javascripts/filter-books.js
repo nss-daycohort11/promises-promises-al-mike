@@ -3,6 +3,8 @@ define(function(require) {
   var Q = require("q");
   var promises = require("promises");
 
+  /*jshint esnext: true */
+
   return {
   	filterAll: function (newbooks) {
   		// reload all data
@@ -20,7 +22,7 @@ define(function(require) {
   			}
   		});
   		// rename array to match handlebars template
-  		var newbooks = fictionbooks;
+  		newbooks = fictionbooks;
   		// run through handlebars
 		require(['hbs!../templates/books'], function(bookTpl) {
           $("#bookList").html(bookTpl({ newbooks }));
@@ -33,9 +35,9 @@ define(function(require) {
   			if (currentbook.type === "Science & Technology") {
   				sciencebooks.push(currentbook);
   			}
-  		})
+  		});
   		// rename array to match handlebars template
-  		var newbooks = sciencebooks;
+  		newbooks = sciencebooks;
   		// run through handlebars
 		require(['hbs!../templates/books'], function(bookTpl) {
 	      $("#bookList").html(bookTpl({ newbooks }));
